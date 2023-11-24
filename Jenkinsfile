@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage("Cleanup Workspace"){
                 steps {
-                cleanWs()
+                      sh "dotnet build --configuration Release --no-restore"
                 }
        
       stage("Checkout from SCM"){

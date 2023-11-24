@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'Jenkins-Agent' }
+    agent { label 'jenkins-agent' }
     
     stages {
         stage("Cleanup Workspace") {

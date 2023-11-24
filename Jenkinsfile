@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your code from the Git repository
-                git 'https://github.com/your-username/your-dotnet-project.git'
+                git 'https://github.com/ANAGH1234/DUAS.git'
             }
         }
         

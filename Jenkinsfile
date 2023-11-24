@@ -15,17 +15,24 @@ pipeline {
             }
         }
 
-        stage('Restore Packages') {
+         stage('Restore Packages') {
             steps {
                 // Restore NuGet packages for the project
-                sh 'dotnet restore'
+                bat 'nuget restore'
             }
         }
 
         stage('Build') {
             steps {
                 // Build the .NET project
-                sh 'dotnet build --configuration Release'
+                bat 'msbuild /p:Configuration=Release'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run tests for the .NET project
+                bat 'msbuild /t:VSTest'
             }
         }
     }

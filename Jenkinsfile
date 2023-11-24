@@ -15,26 +15,34 @@ pipeline {
             }
         }
 
-         stage('Restore Packages') {
+        
+        stage('Restore Packages') {
             steps {
-                // Restore NuGet packages for the project
-                bat 'nuget restore'
+                // Restore NuGet packages for the .NET Core project
+                sh 'dotnet restore'
             }
         }
-
+        
         stage('Build') {
             steps {
-                // Build the .NET project
-                bat 'msbuild /p:Configuration=Release'
+                // Build the .NET Core project
+                sh 'dotnet build --configuration Release'
             }
         }
-
+        
         stage('Run Tests') {
             steps {
-                // Run tests for the .NET project
-                bat 'msbuild /t:VSTest'
+                // Run tests for the .NET Core project
+                sh 'dotnet test --configuration Release --logger "trx;LogFileName=testresults.trx"'
+            }
+            post {
+                always {
+                    // Archive the test results
+                    archiveArtifacts 'testresults.trx'
+                }
             }
         }
+    }
     }
 }
 

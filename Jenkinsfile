@@ -33,19 +33,19 @@ pipeline {
                     }
 
                     // Change to the Application directory
-                    dir('DUAS/Application') {
+                    dir('Application') {
                         // Build Application
                         sh 'dotnet build --configuration Release --no-restore'
                     }
 
                     // Change to the Domain directory
-                    dir('DUAS/Domain') {
+                    dir('Domain') {
                         // Build Domain
                         sh 'dotnet build --configuration Release --no-restore'
                     }
 
                     // Change to the Persistence directory
-                    dir('DUAS/Persistence') {
+                    dir('Persistence') {
                         // Build Persistence
                         sh 'dotnet build --configuration Release --no-restore'
                     }

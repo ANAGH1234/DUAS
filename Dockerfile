@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the project file and restore dependencies
 COPY *.csproj ./
-RUN dotnet restore
+#RUN dotnet restore
 
 # Copy all project files and restore dependencies
 COPY . ./

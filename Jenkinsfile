@@ -55,5 +55,19 @@ pipeline {
                 }
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube analysis
+                    withSonarQubeEnv() {
+                        def scannerHome = tool 'SonarScanner for MSBuild'
+                        sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"DUAS\""
+                        sh 'dotnet build'
+                        sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
+                    }
+                }
+            }
+        }
     }
 }

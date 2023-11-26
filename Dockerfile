@@ -18,4 +18,4 @@ COPY --from=build-env /app/out .
 EXPOSE 80
 
 # Define the command to run your application
-ENTRYPOINT ["dotnet", "YourMainApi.dll"]
+ENTRYPOINT ["dotnet", "DUAS"]

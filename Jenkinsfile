@@ -4,6 +4,7 @@ pipeline {
     environment {
         // Define your GitHub credentials ID
         GIT_CREDENTIALS = credentials('Github')
+	    DOCKER_HOME = tool 'sagarupreti0307'
             APP_NAME = "DUAS-Social-Site"
             RELEASE = "1.0.0"
             DOCKER_USER = "sagarupreti0307"
@@ -94,6 +95,7 @@ pipeline {
         stage("Build & Push Docker Image") {
             steps {
                 script {
+		    def dockerCommand = "${DOCKER_HOME}/docker"
                     docker.withRegistry('',DOCKER_PASS) {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }

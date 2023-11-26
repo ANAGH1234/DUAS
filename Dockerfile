@@ -1,5 +1,5 @@
 # Use the official .NET Core runtime as a base image
-FROM mcr.microsoft.com/dotnet/runtime:7.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 # Set the working directory inside the container
 WORKDIR /app
 

@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Change to the API directory
-                    dir('DUAS/API') {
+                    dir('API') {
                         // Restore and build API
                         sh 'dotnet restore'
                         sh 'dotnet build --configuration Release --no-restore'

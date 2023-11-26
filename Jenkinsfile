@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define your GitHub credentials ID
-        GIT_CREDENTIALS = credentials('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')
+        GIT_CREDENTIALS = credentials('Github')
     }
 
     stages {

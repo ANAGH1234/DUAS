@@ -1,5 +1,5 @@
 # Use the official .NET Core runtime as a base image
-FROM mcr.microsoft.com/dotnet/core/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:5.0-alpine AS build-env
 
 # Set the working directory inside the container
 WORKDIR /app

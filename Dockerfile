@@ -7,9 +7,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 # Copy all project files and restore dependencies
-COPY . .
-
-# Build the application
+COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build the runtime image

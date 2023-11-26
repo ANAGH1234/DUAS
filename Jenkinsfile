@@ -12,9 +12,8 @@ pipeline {
                 script {
                     // Remove existing files
                     deleteDir()
+checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ANAGH1234/DUAS.git']]])
 
-                    // Clone the repository using Jenkins credentials
-                    git credentialsId: GIT_CREDENTIALS, url: 'https://github.com/ANAGH1234/DUAS'
                 }
             }
         }

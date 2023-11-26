@@ -3,6 +3,9 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 # Set the working directory inside the container
 WORKDIR /app
 
+COPY *.csproj ./
+RUN dotnet restore
+
 # Copy all project files and restore dependencies
 COPY . .
 

@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Define your GitHub credentials ID
         GIT_CREDENTIALS = credentials('Github')
-	    DOCKER_HOME = tool 'sagarupreti0307'
+	    DOCKER_HOME = tool 'Docker'
             APP_NAME = "DUAS-Social-Site"
             RELEASE = "1.0.0"
             DOCKER_USER = "sagarupreti0307"

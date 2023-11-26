@@ -57,17 +57,23 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Run SonarQube analysis
-                    withSonarQubeEnv() {
-                        def scannerHome = tool 'SonarScanner for MSBuild'
-                        sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"DUAS\""
-                        sh 'dotnet build'
-                        sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
-                    }
-                }
+    steps {
+        script {
+            // Run SonarQube analysis
+            withSonarQubeEnv('sonarqube-server') {
+                def scannerHome = tool 'SonarScanner for MSBuild'
+
+                // Ensure the correct .NET SDK version is available
+                def dotnetHome = tool 'dotnet-sdk-5.0.0-rc.2.20475.5'
+
+                sh "${dotnetHome}/dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"DUAS\""
+                // Replace the following line with your actual build command
+                sh 'dotnet build'
+                sh "${dotnetHome}/dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
             }
         }
+    }
+}
+
     }
 }

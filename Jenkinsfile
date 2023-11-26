@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        // Define your GitHub credentials ID
+        GIT_CREDENTIALS = credentials('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')
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -8,8 +13,8 @@ pipeline {
                     // Remove existing files
                     deleteDir()
 
-                    // Clone the repository
-                    git 'https://ANAGH1234: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@github.com/ANAGH1234/DUAS'
+                    // Clone the repository using Jenkins credentials
+                    git credentialsId: GIT_CREDENTIALS, url: 'https://github.com/ANAGH1234/DUAS'
                 }
             }
         }

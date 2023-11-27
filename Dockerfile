@@ -9,7 +9,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build the runtime image
-FROM mcr.microsoft.com/dotnet/runtime:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
 # Set the working directory for the runtime image
 WORKDIR /app

@@ -1,24 +1,23 @@
 # Use the official .NET Core SDK image for the build stage
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
-
-# Set the working directory inside the container
 WORKDIR /app
-
-# Copy all project files and restore dependencies
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-
-# Set the working directory for the runtime image
-WORKDIR /app
-
-# Copy the published output from the build stage
-COPY --from=build-env /app/out .
-
-# Expose the port your app will run on
 EXPOSE 8080
 
-# Define the command to run your application
-ENTRYPOINT ["dotnet", "API.dll"]
+# copy .csproj and restore as distinct layers
+COPY "Reactivities.sln" "Reactivities.sln"
+COPY "API/API.csproj" "API/API.csproj"
+COPY "Application/Application.csproj" "Application/Application.csproj"
+COPY "Persistence/Persistence.csproj" "Persistence/Persistence.csproj"
+COPY "Domain/Domain.csproj" "Domain/Domain.csproj"
+
+
+# copy everything else and build
+COPY . .
+WORKDIR /app
+RUN dotnet publish -c Release -o out
+
+# build a runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT [ "dotnet", "API.dll" ]
